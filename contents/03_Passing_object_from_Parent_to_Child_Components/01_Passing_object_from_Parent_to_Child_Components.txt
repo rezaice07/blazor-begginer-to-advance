@@ -1,0 +1,118 @@
+
+Passing object from Parent to Child Components
+---------------------------------------------------
+
+--Let's Modifiy the Index.razor page like bellow...
+
+@foreach(var item in contacts)
+{
+    <p>Name : <b>@item.FirstName @item.LastName</b> </p>
+	<p>Email : <b>@item.Email</b> </p>  
+    <hr/>
+}
+
+@code {
+    private List<ContactModel> contacts;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        contacts = new List<ContactModel>
+        {
+            new ContactModel{FirstName="Rejwanul", LastName="Reja",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Khadiza", LastName="Jui",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Junainah Yousra", LastName="Roha",Email="roha@gmail.com" }
+        };
+    }
+}
+
+
+--Let's create a new razor component and pass object to it
+
+##Directory:
+	.../Pages/ContactComponents/ContactListComponent.razor
+	
+##Contents:
+
+<p>Name : <b>@contact.FirstName @contact.LastName</b> </p>
+<p>Email : <b>@contact.Email</b> </p>
+
+
+@code {
+
+    
+    [Parameter]
+    public string FirstName { get; set; }
+
+    [Parameter]
+    public string LastName { get; set; }
+
+    [Parameter]
+    public string Email { get; set; }
+}
+
+
+##Index.razor
+@foreach(var item in contacts)
+{
+    <ContactListComponent FirstName="@item.FirstName" LastName="@item.LastName" Email="@item.Email"></ContactListComponent>     
+    <hr/>
+}
+
+@code {
+    private List<ContactModel> contacts;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        contacts = new List<ContactModel>
+        {
+            new ContactModel{FirstName="Rejwanul", LastName="Reja",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Khadiza", LastName="Jui",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Junainah Yousra", LastName="Roha",Email="roha@gmail.com" }
+        };
+    }
+}
+
+--Now we will modify the ContactListComponent.razor component
+
+<p>Name : <b>@contact.FirstName @contact.LastName</b> </p>
+<p>Email : <b>@contact.Email</b> </p>
+
+
+@code {
+
+    [Parameter]
+    public ContactModel contact { get; set; }   
+}
+
+
+--And the Index.razor page like below...
+@foreach(var item in contacts)
+{   
+    <ContactListComponent contact="@item"></ContactListComponent>  
+    <hr/>
+}
+
+@code {
+    private List<ContactModel> contacts;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        contacts = new List<ContactModel>
+        {
+            new ContactModel{FirstName="Rejwanul", LastName="Reja",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Khadiza", LastName="Jui",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Junainah Yousra", LastName="Roha",Email="roha@gmail.com" }
+        };
+    }
+}
+
+
+
+
+
