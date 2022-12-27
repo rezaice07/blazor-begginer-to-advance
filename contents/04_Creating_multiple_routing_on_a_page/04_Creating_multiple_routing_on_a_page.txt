@@ -1,0 +1,20 @@
+Let's create a page for "UserProfile.razor"
+
+Let's add following content as you can see...
+
+
+@page "/profile"
+@page "/userprofile"
+
+<h3>User Profile</h3>
+
+@code {
+
+}
+
+
+now try to navigate 
+/profile
+/userprofile
+
+as you can see the same result showing 
