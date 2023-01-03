@@ -1,0 +1,89 @@
+--working with variable
+
+@page "/manipulation"
+
+<h3>Hello, @userName</h3>
+
+@code {
+	private string userName ="rezaice07";
+}
+
+--how to we use method
+
+@page "/manipulation"
+
+<h3>Hello, @GetDesc</h3>
+
+@code {
+	private string GetDesc (){
+		return "This is a complete tutorial series";
+	}
+}
+
+
+--button click
+
+@page "/manipulation"
+
+<h3>Working with Button click</h3>
+
+<button click="()=>getTotal()">Get Sum</button>
+
+<p>Result : @total</p>
+
+@code {
+	private int total=0;
+	private void getTotal (){
+		total = 100+300;
+	}
+}
+
+--button click for explicit
+
+@page "/manipulation"
+
+<h3>Working with Button click</h3>
+
+<button click="()=>{total=100+300;}">Get Sum</button>
+
+<p>Result : @total</p>
+
+@code {
+	private int total=0;
+	/*
+	private void getTotal (){
+		total = 100+300;
+	}
+	*/
+}
+
+
+--Conditional Statement
+
+
+@page "/manipulation"
+
+<h3>Working with Button click</h3>
+
+<button click="()=>{total=100+300;}">Get Sum</button>
+
+@if(total<5){
+	<p>Result is less than 5 </p>
+}
+else
+{
+	<p>Result is greater than or equal to 5 </p>
+}
+
+@for(int i =0; i<10;i++)
+{
+	<p>Iteration - @i</p>
+}
+
+@code {
+	private int total=0;
+	
+	private void getTotal (){
+		total += 1;
+	}
+}

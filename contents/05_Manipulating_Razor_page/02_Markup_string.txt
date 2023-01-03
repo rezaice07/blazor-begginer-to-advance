@@ -1,0 +1,22 @@
+
+--lets create a page with the name of "MarkupStr.razor"
+
+
+@page "/markupstr"
+
+<PageTitle>Markup String</PageTitle>
+
+@foreach(var country in countries)
+{
+    <p>@((MarkupString)(country))</p>
+}
+
+@code {
+    private List<string> countries;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        countries = new List<string> { "<b>Qatar</b>", "<b>Brazil</b>", "<b>USA</b>", "Candda" };
+    }
+}
