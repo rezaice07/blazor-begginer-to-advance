@@ -1,0 +1,125 @@
+
+What is Razor Component?
+-----------------------------
+Components are implemented using a combination of C# and HTML markup in Razor component files with the .razor file extension.
+Razor components, informally known as Blazor.
+In Razor component, we don't need to use the routing.
+
+
+Let's see an example...
+now we will add some content like....
+
+Example 01:
+
+Let's create a model of "ContactModel" in Data folder
+
+namespace BlazorApp.Data
+{
+    [Serializable]
+    public class ContactModel
+    {
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+    }
+}
+
+--Now we will modify the index.razor page...
+
+
+
+@page "/"
+
+<PageTitle>Home</PageTitle>
+
+@foreach(var item in contacts)
+{
+	<ContactListComponent FirstName="@item.FirstName" LastName="@item.LastName" Email="@item.Email"></ContactListComponent>       
+    <hr/>
+}
+
+@code {
+    private List<ContactModel> contacts;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        contacts = new List<ContactModel>
+        {
+            new ContactModel{FirstName="Rejwanul", LastName="Reja",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Khadiza", LastName="Jui",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Junainah Yousra", LastName="Roha",Email="roha@gmail.com" }
+        };
+    }
+}
+
+Now we will create a folder named as ContactComponents inside the pages folder
+And let's create a component as like "ContactListComponent.razor"
+----------------------------------------------------------------------------------
+
+<p>Name : <b>@FirstName @LastName</b> </p>
+<p>Email : <b>@Email</b> </p>
+
+
+@code {
+    Parameter]
+    public string FirstName { get; set; }
+
+    [Parameter]
+    public string LastName { get; set; }
+
+    [Parameter]
+    public string Email { get; set; }
+}
+
+
+
+
+
+Example 02:
+
+--Now we will modify the index.razor page again...
+
+
+
+@page "/"
+
+<PageTitle>Home</PageTitle>
+
+@foreach(var item in contacts)
+{
+	 <ContactListComponent contact="@item"></ContactListComponent>      
+    <hr/>
+}
+
+@code {
+    private List<ContactModel> contacts;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        contacts = new List<ContactModel>
+        {
+            new ContactModel{FirstName="Rejwanul", LastName="Reja",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Khadiza", LastName="Jui",Email="rezaice07@gmail.com" },
+            new ContactModel{FirstName="Junainah Yousra", LastName="Roha",Email="roha@gmail.com" }
+        };
+    }
+}
+
+<p>Name : <b>@contact.FirstName @contact.LastName</b> </p>
+<p>Email : <b>@contact.Email</b> </p>
+
+
+@code {
+
+    [Parameter]
+    public ContactModel contact { get; set; }    
+}
+
+
+
+
